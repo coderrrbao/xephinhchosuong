@@ -91,15 +91,44 @@
         button:focus {
             outline: none;
         }
+
+        .btn_dichuyen {
+            width: 300px;
+            display: none;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .btn_dichuyen button {
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(92, 90, 87);
+        }
+
+        .btn_giua {
+            transform: rotate(90deg);
+        }
+
+        .btn_dichuyen.them {
+            display: flex;
+        }
     </style>
 </head>
 
 <body>
     <div class="diem"></div>
     <div class="game"></div>
-    <div class="diem">
+    <div class="diem"></div>
+    <div class="btn_dichuyen">
+        <button class="btn_trai" onclick="nutdichuyentrai()">
+            < </button>
+                <button class="btn_giua" onclick="nutdichuyengiua()"> > </button>
+                <button class="btn_phai" onclick="nutdichuyenphai()"> > </button>
 
     </div>
+
     <div class="cpr">Bảo</div>
     <div class="start">NHẤN ĐỂ BẮT ĐẦU</div>
     <audio class="music" src="audio/chill.m4a" loop></audio>
@@ -475,11 +504,36 @@
         }
     }
     let tocdo = 500;
+    let k;//day la khoi gach
+    function nutdichuyentrai() {
+        k.dichuyen(3);
+        capnhap();
+    }
+    document.querySelector(".btn_trai").addEventListener("mouseenter", function () {
+        nutdichuyentrai();
+    });
+    document.querySelector(".btn_giua").addEventListener("mouseenter", function () {
+        nutdichuyengiua();
+    });
+    document.querySelector(".btn_phai").addEventListener("mouseenter", function () {
+        nutdichuyenphai();
+    });
+    function nutdichuyenphai() {
+        k.dichuyen(2);
+        capnhap();
+    }
+    function nutdichuyengiua() {
+        k.dichuyen(1);
+        capnhap();
+    }
     function playgame() {
         document.querySelector('.diem').textContent = "Điểm : " + diem;
-        let k = new khoiGach(rand(1, 5));
+        k = new khoiGach(rand(1, 5));
         capnhap();
         document.addEventListener('click', function (event) {
+            if (event.target.closest('.btn_phai') || event.target.closest('.btn_trai')) {
+                return;
+            }
             k.dichuyen(4);
             capnhap();
 
@@ -576,15 +630,17 @@
 
 
         document.addEventListener("click", function () {
+            playgame();
             music.volume = 0.5;
             tacbat();
-
             let game = document.querySelector('.game');
             let diem = document.querySelector('.diem');
             let start = document.querySelector('.start');
+            let gamedichuyen = document.querySelector(' .btn_dichuyen');
             game.classList.add('them');
             diem.classList.add('them');
             start.classList.add('them');
+            gamedichuyen.classList.add('them');
         }, { once: true });
 
         for (let i = 0; i < dong; i++) {
@@ -626,7 +682,7 @@
                 o.style.opacity = "0";
             }
         }
-        playgame();
+
     };
 
 </script>
