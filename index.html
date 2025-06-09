@@ -92,26 +92,26 @@
             outline: none;
         }
 
-        .btn_dichuyen {
-            width: 300px;
-            display: none;
-            justify-content: space-between;
-            padding: 0 10px;
-        }
-
-        .btn_dichuyen button {
+        .btn_trai,
+        .btn_phai,
+        .btn_giua {
+            font-size: 25px;
             background-color: transparent;
             border: none;
-            font-size: 25px;
-            font-weight: bold;
-            color: white;
+            display: none;
+        }
+
+        .btn_trai.them,
+        .btn_phai.them,
+        .btn_giua.them {
+            display: block;
         }
 
         .btn_giua {
             transform: rotate(90deg);
         }
 
-        .btn_dichuyen.them {
+        .ctn_game {
             display: flex;
         }
     </style>
@@ -119,16 +119,15 @@
 
 <body>
     <div class="diem"></div>
-    <div class="game"></div>
-    <div class="diem"></div>
-    <div class="btn_dichuyen">
+    <div class="ctn_game">
         <button class="btn_trai" onclick="nutdichuyentrai()">
             < </button>
-                <button class="btn_giua" onclick="nutdichuyengiua()"> > </button>
+                <div class="game"></div>
                 <button class="btn_phai" onclick="nutdichuyenphai()"> > </button>
-
     </div>
 
+    <div class="diem"></div>
+    <button class="btn_giua" onclick="nutdichuyengiua()"> > </button>
     <div class="cpr">Bảo</div>
     <div class="start">NHẤN ĐỂ BẮT ĐẦU</div>
     <audio class="music" src="audio/chill.m4a" loop></audio>
@@ -509,15 +508,6 @@
         k.dichuyen(3);
         capnhap();
     }
-    document.querySelector(".btn_trai").addEventListener("mouseenter", function () {
-        nutdichuyentrai();
-    });
-    document.querySelector(".btn_giua").addEventListener("mouseenter", function () {
-        nutdichuyengiua();
-    });
-    document.querySelector(".btn_phai").addEventListener("mouseenter", function () {
-        nutdichuyenphai();
-    });
     function nutdichuyenphai() {
         k.dichuyen(2);
         capnhap();
@@ -531,7 +521,7 @@
         k = new khoiGach(rand(1, 5));
         capnhap();
         document.addEventListener('click', function (event) {
-            if (event.target.closest('.btn_phai') || event.target.closest('.btn_trai')) {
+            if (event.target.closest('.btn_phai') || event.target.closest('.btn_trai') || event.target.closest('.btn_giua')) {
                 return;
             }
             k.dichuyen(4);
@@ -636,11 +626,16 @@
             let game = document.querySelector('.game');
             let diem = document.querySelector('.diem');
             let start = document.querySelector('.start');
-            let gamedichuyen = document.querySelector(' .btn_dichuyen');
+            let dichuyentrai = document.querySelector(' .btn_trai');
+            let dichuyenphai = document.querySelector(' .btn_phai');
+            let dichuyengiua = document.querySelector(' .btn_giua');
+
             game.classList.add('them');
             diem.classList.add('them');
             start.classList.add('them');
-            gamedichuyen.classList.add('them');
+            dichuyengiua.classList.add('them');
+            dichuyentrai.classList.add('them');
+            dichuyenphai.classList.add('them');
         }, { once: true });
 
         for (let i = 0; i < dong; i++) {
