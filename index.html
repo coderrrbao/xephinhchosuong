@@ -28,13 +28,12 @@
         }
 
         .game {
+            margin: 0;
             margin-top: -70px;
             background-color: transparent;
             display: grid;
             grid-template-columns: repeat(17, 20px);
             grid-template-rows: repeat(31, 20px);
-
-
             display: none;
         }
 
@@ -101,6 +100,20 @@
             display: none;
         }
 
+        .btn_trai {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .btn_phai {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            z-index: 10;
+        }
+
         .btn_trai.them,
         .btn_phai.them,
         .btn_giua.them {
@@ -112,7 +125,10 @@
         }
 
         .ctn_game {
+            position: relative;
             display: flex;
+            width: 335px;
+            justify-content: center;
         }
     </style>
 </head>
